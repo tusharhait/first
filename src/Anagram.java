@@ -1,6 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Anagram {
     public static boolean isAnagram(String s, String t) {
@@ -38,5 +36,28 @@ public class Anagram {
         System.out.println("Second String");
         String t = scanner.nextLine();
         System.out.println(Anagram.isAnagram(s,t));
+    }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String,List<String>> groups = new HashMap<>();
+        for(int i =0;i< strs.length;i++){
+            char[] arr = strs[i].toCharArray();
+            Arrays.sort(arr);
+            String prot = new String(arr);
+            if(groups.containsKey(prot)){
+                List<String> proto = groups.get(prot);
+                proto.add(strs[i]);
+                groups.put(prot,proto);
+            }else{
+                List<String> proto = new ArrayList<>();
+                proto.add(strs[i]);
+                groups.put(prot,proto);
+            }
+        }
+        List<List<String>> result = new ArrayList<>();
+        for(List<String> groupsL: groups.values()){
+            result.add(groupsL);
+        }
+        return result;
     }
 }
