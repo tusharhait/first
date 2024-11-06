@@ -6,6 +6,11 @@ public class KFrequent {
         int[] input = new int[]{1,1,1,2,2,3};
         int[] result = KFrequent.topKFrequent(input,target);
         System.out.println(result);
+        int[] input1 = new int[]{1,2,3,4};
+        KFrequent kFrequent = new KFrequent();
+        int[] sums= kFrequent.productExceptSelf(input1);
+        System.out.println(sums);
+
     }
 
     public static int[] topKFrequent(int[] nums, int k) {
@@ -32,6 +37,21 @@ public class KFrequent {
         while(!integerPriorityQueue.isEmpty()){
             result[j]=integerPriorityQueue.poll().getKey();
             j++;
+        }
+        return result;
+    }
+
+    public int[] productExceptSelf(int[] nums) {
+        int temp = 1;
+        int[] result = new int[nums.length];
+        for(int i = 0;i<nums.length;i++){
+            result[i]=temp;
+            temp=temp*nums[i];
+        }
+        temp=1;
+        for(int i = nums.length-1;i>=0;i--){
+            result[i]=temp*result[i];
+            temp=temp*nums[i];
         }
         return result;
     }
